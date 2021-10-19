@@ -14,15 +14,16 @@ public class ClassForBookVerification {
         System.out.println("Book two is in the library: "+mapWithBook.get(book1));
         System.out.println("=============");
         
-
         List<Book> listOfBooks = Book.getListOfBooks(10);
-
-
+        
         listOfBooks.stream().forEach(x -> System.out.println(x.toString()));
         listOfBooks.stream().forEach(x -> System.out.println(x.getBookName()));
         System.out.println("Total price of all books: " + listOfBooks.stream().mapToInt(Book::getBookPrice).sum());
-        listOfBooks.stream().filter(x -> x.getBookName().contains("a")).forEach(x -> System.out.println(x.getBookName()));
-
-
+        System.out.println("==========");
+        System.out.println(listOfBooks.stream().filter(x -> x.getBookName()
+                .contains("a"))
+                .findAny()
+                .orElseThrow(() -> new IllegalStateException("Book is not found"))
+                .getBookName());
     }
 }
